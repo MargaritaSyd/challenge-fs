@@ -1,14 +1,17 @@
 module.exports = [
     {
-        email: 'pepi@gmail.com',
-        password: 'bicicleta',
+        id: 1234567890,
+        name: 'Pedro',
+        secretKey: 'Bicicleta'
     },
     {
-        email: 'cele@gmail.com',
-        password: 'paltas',
+        id: 1234567850,
+        name: 'Celeste',
+        secretKey: 'Patines',
     },
     {
-        email: 'pato@gmail.com',
-        password: 'naranjas'
+        id: 1234567590,
+        name: 'Juan',
+        secretKey: 'Naranja'
     },
 ]
