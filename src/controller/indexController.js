@@ -16,12 +16,10 @@ let indexController = {
             if(name == users[i].name){
                 let user = users[i]
                 req.session.userLogged= user
-                const token = jwt.sign(user , secretKey
-                );
+              //  const token = jwt.sign(user , secretKey);
                 
-              //  res.render("index" , {user})
-            //  res.redirect("dashboard" + "?token="token)
-            res.send(token)
+             res.redirect("dashboard")
+            // , {token:token}
             } else { 
                 res.send("Usuario o contraseña incorrecta")
                 }
@@ -31,18 +29,19 @@ let indexController = {
     dashboard: function(req,res){
         let user = req.session.userLogged
         if(user){
-        let { token } = req.query;
-        jwt.verify(token , user.secretKey , (err, decoded) => {
-            err ? res.status(401).send({
-                error: "401 Unauthorized" , 
-                message: err.message
-            }) : res.send("Bienvenido " + user.name);
-        })
+            const token = jwt.sign(user , user.secretKey);
+            jwt.verify(token , user.secretKey , (err, decoded) => {
+                err ? res.status(401).send({
+                    error: "401 Unauthorized" , 
+                    message: err.message
+                }) : res.send("Bienvenido " + user.name);
+            })
         } else {
             res.redirect("login")
+            }
         }
         
-    }
+        
 
 //        const user = users.find((u) => u.email == email && u.password == password);
 //        if (user) {
