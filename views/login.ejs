@@ -9,6 +9,15 @@
 </head>
 <body>
     <div>
+        <% if(locals.message != undefined){%>
+            <div class="cajaMensajeError">
+                <div class="mensajeError"> <p style= "color:red"> Credenciales Inválidas </p></div>
+            </div>
+        <%}%>
+        
+
+    </div>
+    <div>
     <form action="/login" method="POST">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Name</label>

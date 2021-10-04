@@ -10,4 +10,8 @@ router.post('/login', indexController.logged);
 
 router.get('/dashboard' , indexController.dashboard);
 
+router.post('/dashboard' , indexController.verify);
+
+router.get('/welcome' , indexController.welcome);
+
 module.exports = router;

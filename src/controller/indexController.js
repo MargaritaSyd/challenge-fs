@@ -10,6 +10,7 @@ let indexController = {
         res.render('login')
     },
     logged: function(req, res){
+        let message = "Invalid user or password"
         const name = req.body.name;
         const secretKey = req.body.secretKey;
         for(let i=0; i<users.length; i++){
@@ -21,7 +22,7 @@ let indexController = {
              res.redirect("dashboard")
             // , {token:token}
             } else { 
-                res.send("Usuario o contraseña incorrecta")
+                res.redirect("login" , {message:message})
                 }
         }
     },
@@ -29,17 +30,34 @@ let indexController = {
     dashboard: function(req,res){
         let user = req.session.userLogged
         if(user){
-            const token = jwt.sign(user , user.secretKey);
-            jwt.verify(token , user.secretKey , (err, decoded) => {
-                err ? res.status(401).send({
-                    error: "401 Unauthorized" , 
-                    message: err.message
-                }) : res.send("Bienvenido " + user.name);
-            })
+          // jwt.verify(token , user.secretKey , (err, decoded) => {
+            //     err ? res.status(401).send({
+            //         error: "401 Unauthorized" , 
+            //         message: err.message
+            //     }) : res.send("Bienvenido " + user.name);
+            // })
+            res.render("dashboard" , {user})
         } else {
             res.redirect("login")
             }
-        }
+        },
+
+    verify: function(req,res){
+        let user = req.session.userLogged;
+        let secretKey = req.body.secretKey;
+        const token = jwt.sign(user , user.secretKey);
+             jwt.verify(token , secretKey , (err, decoded) => {
+                 err ? res.status(401).send({
+                     error: "401 Unauthorized" , 
+                     message: err.message
+                 }) : res.redirect('welcome')
+             })    
+    },
+
+    welcome: function(req,res){
+        let user = req.session.userLogged;
+        res.render('welcome' , {user})
+    }
         
         
 
