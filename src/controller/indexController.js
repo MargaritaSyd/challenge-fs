@@ -13,18 +13,21 @@ let indexController = {
         let message = "Invalid user or password"
         const name = req.body.name;
         const secretKey = req.body.secretKey;
-        for(let i=0; i<users.length; i++){
-            if(name == users[i].name){
-                let user = users[i]
-                req.session.userLogged= user
-              //  const token = jwt.sign(user , secretKey);
+        let user = users.find(element => element.name == name)
+        req.session.userLogged = user
+
+        // for(let i=0; i<users.length; i++){
+        //     if(name == users[i].name){
+        //         let user = users[i]
+        //         req.session.userLogged= user
+        //       //  const token = jwt.sign(user , secretKey);
                 
              res.redirect("dashboard")
-            // , {token:token}
-            } else { 
-                res.redirect("login" , {message:message})
+        //    } else { 
+        if(!user){
+                res.render("login" , {message:message})
                 }
-        }
+        
     },
 
     dashboard: function(req,res){
@@ -44,13 +47,14 @@ let indexController = {
 
     verify: function(req,res){
         let user = req.session.userLogged;
+        let userSymbol = user.symbol
         let secretKey = req.body.secretKey;
         const token = jwt.sign(user , user.secretKey);
              jwt.verify(token , secretKey , (err, decoded) => {
                  err ? res.status(401).send({
                      error: "401 Unauthorized" , 
                      message: err.message
-                 }) : res.redirect('welcome')
+                 }) : res.render('welcome' , {user , userSymbol})
              })    
     },
 

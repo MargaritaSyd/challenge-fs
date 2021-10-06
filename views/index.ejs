@@ -15,7 +15,7 @@
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+              <a class="nav-link" href="/login">Login</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -33,7 +33,19 @@
     <main>
         <h1> Welcome </h1>
         <div class="cardContent">
-            <% for(let i=1; i<6; i++){%>
+            <% for(let i=1; i<5; i++){%>
+                <div class="card">
+                    <img src="/img/erc20.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">ERC20 type <%=i%></h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet. </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            <%}%>
+        </div>
+        <div class="cardContent">
+            <% for(let i=5; i<9; i++){%>
                 <div class="card">
                     <img src="/img/erc20.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -46,7 +58,7 @@
     
         </div>
         <div class="cardContent">
-            <% for(let i=6; i<11; i++){%>
+            <% for(let i=9; i<13; i++){%>
                 <div class="card">
                     <img src="/img/erc20.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
